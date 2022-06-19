@@ -10,6 +10,14 @@
         .big{
             font-size: 20px;
         }
+        .span_items {
+            display: flex;
+            flex-direction: column;
+            margin: 30px;
+        }
+        span {
+            padding-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -21,11 +29,48 @@
         <li>This is an item</li>
         <li>This is an item</li>
     </ul>
+    <div class="span_items">
+        <span>This is span</span>
+        <span>This is span</span>
+        <span>This is span</span>
+        <span>This is span</span>
+        <span>This is span</span>
+        <span>This is span</span>
+    </div>
     <script>
         d3.selectAll('li:nth-child(odd)')
         .style('color', 'green')
         .html('This is an odd line')
         .classed('big', true);
+    </script>
+    <script>
+        var numArray = [12, 20, 35, 40, 50, 55, 90, 110, 33, 10]
+
+        var span = d3.select('body')
+        .selectAll('.span_items span')
+        .data(numArray)
+        .text(function(d) {
+            return `This is item with number - ${d}`
+        })
+        span.enter().append('span')
+        .text(function(d) {
+            return `This is item with number - ${d}`
+        })
+        span.exit().remove()
+
+
+
+        d3.selectAll('.span_items span')
+        .data(numArray)
+        .text(function(d) {
+            return `This is item with number - ${d}`
+        })
+
+        d3.selectAll('.span_items span')
+        .data(numArray)
+        .style('font-size', function(d) {
+            return d + 'px'
+        })
     </script>
 </body>
 </html>
